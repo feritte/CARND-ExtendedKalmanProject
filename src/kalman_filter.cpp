@@ -58,7 +58,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   float vy = x_(3);
 
   VectorXd z_pred = VectorXd(3);
-  float PI = 3.1415926; // Used for normalizations
+  
 
 
 
@@ -70,8 +70,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   VectorXd y = z - z_pred;
   /**
-  Applying Normalization to improve RMSE. Discussed in Forums
+   Normalization is applied to improve RMSE as it is discussed in Forums
   **/
+  float PI = 3.1415926; 
   while (y(1) < -PI)
     y(1) += 2 * PI;
   while (y(1) > PI)
@@ -82,10 +83,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	MatrixXd S = H_ * P_ * Ht + R_;
 	MatrixXd Si = S.inverse();
 	MatrixXd K =  P_ * Ht * Si;
-
-  //new estimate
+	
+	//new estimate
 	x_ = x_ + (K * y);
 	long x_size = x_.size();
 	MatrixXd I = MatrixXd::Identity(x_size, x_size);
-P_ = (I - K * H_) * P_;
+	P_ = (I - K * H_) * P_;
 }

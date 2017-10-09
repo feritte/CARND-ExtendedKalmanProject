@@ -114,11 +114,11 @@ ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measureme
      * Update the process noise covariance matrix.
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
    */
-   float noise_ax = 9; // Specified in comment block above
-   float noise_ay = 9; // Specified in comment block above
+   float noise_ax = 9; 
+   float noise_ay = 9; 
 
-   // Adapting Code from Lesson 5, Section 13
-   float dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;	//dt - expressed in seconds
+	//dt - expressed in seconds
+   float dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;	
    previous_timestamp_ = measurement_pack.timestamp_;
 
    float dt_2 = dt * dt;
